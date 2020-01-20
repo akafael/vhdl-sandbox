@@ -25,8 +25,6 @@ library ieee;
     use ieee.std_logic_1164.all;
     use ieee.numeric_std.all;
 
-use work.gatespkg.all;
-
 -- Entity ----------------------------------------------------------------------
 
 --! @brief Do something   
@@ -40,7 +38,7 @@ entity Comparator is port(
 end entity Comparator;
 
 -- Boolean Description
-architecture bool of dummy is
+architecture bool of Comparator is
   signal X:std_logic_vector (3 downto 0);
 
 begin

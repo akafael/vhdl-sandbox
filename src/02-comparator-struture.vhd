@@ -40,7 +40,7 @@ entity Comparator is port(
 end entity Comparator;
 
 -- Scrutural Description
-architecture scruture of dummy is
+architecture scruture of Comparator is
   signal X:std_logic_vector (3 downto 0);
 
 begin

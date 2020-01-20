@@ -3,8 +3,8 @@
 #
 
 # Compiler Options
-CC := gvhdl
-CC_FLAGS := 
+CC := ghdl
+CC_FLAGS :=
 
 # Target files
 VHDL_SRC := $(wildcard *.vhd)
@@ -15,7 +15,7 @@ VHDL_CSRC := $(VHDL_SRC:.vhd=.cc)
 ALL: $(VHDL_OBJ)
 
 %.o: %.vhd
-	$(CC) -c $< $(CC_FLAGS)
+	$(CC) -a $< $(CC_FLAGS)
 
 .PHONY = clear
 clean:
