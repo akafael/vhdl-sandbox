@@ -19,7 +19,7 @@ VHDL_OBJ := $(VHDL_SRC:.vhd=.o)
 VHDL_CSRC := $(VHDL_SRC:.vhd=.cc)
 
 ###############################################################################
-# Variables
+# Rules
 ###############################################################################
 
 # Man Rule
@@ -33,8 +33,21 @@ help:
 	@sed Makefile -n -e "N;s/^# \(.*\)\n.PHONY:\(.*\)/ \2:\1/p;D" | column -ts:
 	@echo ""
 
-%.o: %.vhd
-	$(CC) -a $< $(CC_FLAGS)
+# Compile and simulate hello_world example
+.PHONY: helloworld
+helloworld: src/00_hello_world/hello_world.vhd
+	cd src/00_hello_world
+	$(CC) -a $^
+	$(CC) -e hello_world
+	$(CC) -r hello_world
+
+# Compile and simulate full adder example
+.PHONY: adder
+adder: src/02_adder/adder.vhd src/02_adder/adder_tb.vhd
+	cd src/02_adder
+	$(CC) -a $^
+	$(CC) -e adder_tb
+	$(CC) -r adder_tb
 
 # Remove Generated Files
 .PHONY: clear
