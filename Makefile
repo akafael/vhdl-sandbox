@@ -12,11 +12,6 @@
 CC := ghdl
 CC_FLAGS :=
 
-# Target files
-VHDL_DIR := src
-VHDL_SRC := $(wildcard ${VHDL_DIR}/*.vhd)
-VHDL_OBJ := $(VHDL_SRC:.vhd=.o)
-VHDL_CSRC := $(VHDL_SRC:.vhd=.cc)
 
 ###############################################################################
 # Rules
@@ -24,7 +19,7 @@ VHDL_CSRC := $(VHDL_SRC:.vhd=.cc)
 
 # Man Rule
 .PHONY: ALL
-ALL: $(VHDL_OBJ)
+ALL: hello_world adder
 
 # Print help for all commands
 .PHONY: help
@@ -34,9 +29,8 @@ help:
 	@echo ""
 
 # Compile and simulate hello_world example
-.PHONY: helloworld
-helloworld: src/00_hello_world/hello_world.vhd
-	cd src/00_hello_world
+.PHONY: hello_world
+hello_world: src/00_hello_world/hello_world.vhd
 	$(CC) -a $^
 	$(CC) -e hello_world
 	$(CC) -r hello_world
@@ -44,7 +38,6 @@ helloworld: src/00_hello_world/hello_world.vhd
 # Compile and simulate full adder example
 .PHONY: adder
 adder: src/02_adder/adder.vhd src/02_adder/adder_tb.vhd
-	cd src/02_adder
 	$(CC) -a $^
 	$(CC) -e adder_tb
 	$(CC) -r adder_tb
@@ -52,7 +45,7 @@ adder: src/02_adder/adder.vhd src/02_adder/adder_tb.vhd
 # Remove Generated Files
 .PHONY: clear
 clean:
-	rm -vrf $(VHDL_OBJ) $(VHDL_CSRC)
+	rm -vrf work-obj93.cf
 
 ###############################################################################
 # Documentation Rules
